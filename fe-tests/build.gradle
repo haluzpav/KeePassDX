@@ -1,0 +1,10 @@
+apply plugin: 'java-library'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'junit:junit:4.12'
+    compile 'io.appium:java-client:6.0.0-BETA2'
+}
+
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
