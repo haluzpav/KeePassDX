@@ -1,4 +1,4 @@
-# Android Keepass DX
+# Android Keepass DX - with more tests!
 
 <img src="https://raw.githubusercontent.com/Kunzisoft/KeePassDX/master/art/logo.png"> Keepass DX is a material design Keepass Client for manage keys and passwords in crypt database for your android device.
 
