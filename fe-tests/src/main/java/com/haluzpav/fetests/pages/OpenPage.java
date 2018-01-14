@@ -8,7 +8,7 @@ import io.appium.java_client.AppiumDriver;
 public class OpenPage extends BasePage {
 
     @FindBy(id = "menu_donate")
-    WebElement donateButton;
+    private WebElement donateButton;
 
     public OpenPage(AppiumDriver<WebElement> driver) {
         super(driver);

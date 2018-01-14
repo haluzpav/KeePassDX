@@ -17,16 +17,16 @@ import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServerHasNotBeenStartedLocallyException;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 
-abstract class BaseTest {
+abstract class BaseTest implements Driven {
 
-    private static final String PROPERTIES_PATH = "/fe-tests/src/main/resources/appium.properties";
+    private static final String APPIUM_PROPERTIES_PATH = "/fe-tests/src/main/resources/appium.properties";
 
-    private Properties properties;
+    private Properties appiumProps;
     private AppiumDriverLocalService service;
     private AppiumDriver<WebElement> driver;
 
     @Before
-    public void setUp() throws IOException {
+    public void setUp() {
         loadProperties();
         startService();
         initDriver(service.getUrl());
@@ -36,14 +36,14 @@ abstract class BaseTest {
     public void setUpFromRunning() throws IOException {
         // does not work
         loadProperties();
-        initDriver(new URL(properties.getProperty("url")));
+        initDriver(new URL(appiumProps.getProperty("url")));
     }
 
     private void loadProperties() {
-        File propertiesFile = new File(System.getProperty("user.dir") + PROPERTIES_PATH);
-        properties = new Properties();
+        File propertiesFile = new File(System.getProperty("user.dir") + APPIUM_PROPERTIES_PATH);
+        appiumProps = new Properties();
         try {
-            properties.load(new FileInputStream(propertiesFile));
+            appiumProps.load(new FileInputStream(propertiesFile));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -51,7 +51,7 @@ abstract class BaseTest {
 
     private void startService() {
         service = new AppiumServiceBuilder()
-                .withAppiumJS(new File("/usr/lib/node_modules/appium/build/lib/main.js"))
+                .withAppiumJS(new File(appiumProps.getProperty("mainJs")))
                 .build();
         service.start();
 
@@ -63,8 +63,8 @@ abstract class BaseTest {
 
     private DesiredCapabilities buildCapabilities() {
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        for (String capabilityName : properties.getProperty("capabilities").split(",")) {
-            capabilities.setCapability(capabilityName, properties.getProperty(capabilityName));
+        for (String capabilityName : appiumProps.getProperty("usedCapabilities").split(",")) {
+            capabilities.setCapability(capabilityName, appiumProps.getProperty(capabilityName));
         }
         return capabilities;
     }
@@ -83,7 +83,8 @@ abstract class BaseTest {
         }
     }
 
-    final AppiumDriver<WebElement> driver() {
+    @Override
+    public final AppiumDriver<WebElement> driver() {
         return driver;
     }
 

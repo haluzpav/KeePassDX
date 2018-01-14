@@ -1,11 +1,13 @@
 package com.haluzpav.fetests.pages;
 
+import com.haluzpav.fetests.Driven;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
 import io.appium.java_client.AppiumDriver;
 
-abstract class BasePage {
+abstract class BasePage implements Driven {
 
     private AppiumDriver<WebElement> driver;
 
@@ -14,7 +16,8 @@ abstract class BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    final AppiumDriver<WebElement> driver() {
+    @Override
+    public final AppiumDriver<WebElement> driver() {
         return driver;
     }
 
