@@ -1,16 +1,16 @@
-package com.haluzpav.fetests.pages;
+package com.haluzpav.fetests.model;
+
+import com.haluzpav.fetests.MyDriver;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-import io.appium.java_client.AppiumDriver;
 
 public class OpenPage extends BasePage {
 
     @FindBy(id = "menu_donate")
     private WebElement donateButton;
 
-    public OpenPage(AppiumDriver<WebElement> driver) {
+    OpenPage(MyDriver driver) {
         super(driver);
     }
 

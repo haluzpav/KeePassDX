@@ -1,8 +1,11 @@
-package com.haluzpav.fetests;
+package com.haluzpav.fetests.tests;
+
+import com.haluzpav.fetests.Driven;
+import com.haluzpav.fetests.MyDriver;
+import com.haluzpav.fetests.model.App;
 
 import org.junit.After;
 import org.junit.Before;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.File;
@@ -11,8 +14,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Properties;
 
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServerHasNotBeenStartedLocallyException;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
@@ -23,13 +24,15 @@ abstract class BaseTest implements Driven {
 
     private Properties appiumProps;
     private AppiumDriverLocalService service;
-    private AppiumDriver<WebElement> driver;
+    private MyDriver driver;
+    private App app;
 
     @Before
     public void setUp() {
         loadProperties();
         startService();
         initDriver(service.getUrl());
+        app = new App(driver);
     }
 
     //@Before
@@ -70,7 +73,7 @@ abstract class BaseTest implements Driven {
     }
 
     private void initDriver(URL url) {
-        driver = new AndroidDriver<>(url, buildCapabilities());
+        driver = new MyDriver(url, buildCapabilities());
     }
 
     @After
@@ -84,8 +87,12 @@ abstract class BaseTest implements Driven {
     }
 
     @Override
-    public final AppiumDriver<WebElement> driver() {
+    public final MyDriver driver() {
         return driver;
+    }
+
+    public final App app() {
+        return app;
     }
 
 }
