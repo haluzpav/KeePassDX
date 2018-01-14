@@ -1,37 +1,26 @@
-package com.haluzpav.fetests;
-
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-
-import junit.framework.TestCase;
+package eu.haluzpav.fetests;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.service.DriverService;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
-import java.util.List;
 
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileBy;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServerHasNotBeenStartedLocallyException;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 public class SimpleSample {
 
-    public AppiumDriver<WebElement> driver;
     private static AppiumDriverLocalService service;
+    public AppiumDriver<WebElement> driver;
 
     @Before
     public void setUp() throws IOException {

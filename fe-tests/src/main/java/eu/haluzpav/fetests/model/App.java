@@ -1,7 +1,7 @@
-package com.haluzpav.fetests.model;
+package eu.haluzpav.fetests.model;
 
-import com.haluzpav.fetests.Driven;
-import com.haluzpav.fetests.MyDriver;
+import eu.haluzpav.fetests.Driven;
+import eu.haluzpav.fetests.MyDriver;
 
 public class App implements Driven {
 

@@ -1,7 +1,6 @@
-package com.haluzpav.fetests.model;
+package eu.haluzpav.fetests.model;
 
-import com.haluzpav.fetests.MyDriver;
-
+import eu.haluzpav.fetests.MyDriver;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 

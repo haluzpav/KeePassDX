@@ -1,9 +1,9 @@
-package com.haluzpav.fetests.model;
-
-import com.haluzpav.fetests.Driven;
-import com.haluzpav.fetests.MyDriver;
+package eu.haluzpav.fetests.model;
 
 import org.openqa.selenium.support.PageFactory;
+
+import eu.haluzpav.fetests.Driven;
+import eu.haluzpav.fetests.MyDriver;
 
 abstract class BasePage implements Driven {
 

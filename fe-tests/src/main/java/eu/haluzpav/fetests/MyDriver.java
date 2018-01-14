@@ -1,4 +1,4 @@
-package com.haluzpav.fetests;
+package eu.haluzpav.fetests;
 
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.remote.HttpCommandExecutor;

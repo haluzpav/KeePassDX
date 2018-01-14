@@ -1,9 +1,9 @@
-package com.haluzpav.fetests.model;
-
-import com.haluzpav.fetests.MyDriver;
+package eu.haluzpav.fetests.model;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import eu.haluzpav.fetests.MyDriver;
 
 public class OpenPage extends BasePage {
 

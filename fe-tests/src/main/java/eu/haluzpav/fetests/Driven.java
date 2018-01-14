@@ -1,4 +1,4 @@
-package com.haluzpav.fetests;
+package eu.haluzpav.fetests;
 
 public interface Driven {
 

@@ -1,8 +1,4 @@
-package com.haluzpav.fetests.tests;
-
-import com.haluzpav.fetests.Driven;
-import com.haluzpav.fetests.MyDriver;
-import com.haluzpav.fetests.model.App;
+package eu.haluzpav.fetests.tests;
 
 import org.junit.After;
 import org.junit.Before;
@@ -14,6 +10,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Properties;
 
+import eu.haluzpav.fetests.Driven;
+import eu.haluzpav.fetests.MyDriver;
+import eu.haluzpav.fetests.model.App;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServerHasNotBeenStartedLocallyException;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
