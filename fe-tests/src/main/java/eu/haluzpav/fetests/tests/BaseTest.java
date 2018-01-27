@@ -1,7 +1,7 @@
 package eu.haluzpav.fetests.tests;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.File;
@@ -12,33 +12,25 @@ import java.util.Properties;
 
 import eu.haluzpav.fetests.Driven;
 import eu.haluzpav.fetests.MyDriver;
-import eu.haluzpav.fetests.model.App;
+import eu.haluzpav.fetests.model.BasePage;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServerHasNotBeenStartedLocallyException;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 
-abstract class BaseTest implements Driven {
+public abstract class BaseTest implements Driven {
 
     private static final String APPIUM_PROPERTIES_PATH = "/fe-tests/src/main/resources/appium.properties";
 
     private Properties appiumProps;
     private AppiumDriverLocalService service;
     private MyDriver driver;
-    private App app;
 
-    @Before
+    @BeforeClass
     public void setUp() {
         loadProperties();
         startService();
         initDriver(service.getUrl());
-        app = new App(driver);
-    }
-
-    //@Before
-    public void setUpFromRunning() throws IOException {
-        // does not work
-        loadProperties();
-        initDriver(new URL(appiumProps.getProperty("url")));
+        BasePage.setDriver(driver());
     }
 
     private void loadProperties() {
@@ -75,7 +67,7 @@ abstract class BaseTest implements Driven {
         driver = new MyDriver(url, buildCapabilities());
     }
 
-    @After
+    @AfterClass
     public void tearDown() throws Exception {
         if (driver != null) {
             driver.quit();
@@ -88,10 +80,6 @@ abstract class BaseTest implements Driven {
     @Override
     public final MyDriver driver() {
         return driver;
-    }
-
-    public final App app() {
-        return app;
     }
 
 }
