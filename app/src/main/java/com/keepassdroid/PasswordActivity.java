@@ -147,14 +147,14 @@ public class PasswordActivity extends LockingActivity implements FingerPrintHelp
         super.onActivityResult(requestCode, resultCode, data);
 
         keyFileHelper.onActivityResultCallback(requestCode, resultCode, data,
-                new KeyFileHelper.KeyFileCallback() {
-                    @Override
-                    public void onKeyFileResultCallback(Uri uri) {
-                        if(uri != null) {
-                            keyFileView.setText(uri.toString());
-                        }
+            new KeyFileHelper.KeyFileCallback() {
+                @Override
+                public void onKeyFileResultCallback(Uri uri) {
+                    if(uri != null) {
+                        keyFileView.setText(uri.toString());
                     }
-                });
+                }
+            });
 
         switch (requestCode) {
             case KeePass.EXIT_NORMAL:
@@ -169,7 +169,6 @@ public class PasswordActivity extends LockingActivity implements FingerPrintHelp
                 App.getDB().clear();
                 break;
         }
-
     }
 
     @Override
@@ -259,9 +258,12 @@ public class PasswordActivity extends LockingActivity implements FingerPrintHelp
 
     private void setEmptyViews() {
         passwordView.setText("");
-        keyFileView.setText("");
         checkboxPasswordView.setChecked(false);
-        checkboxKeyfileView.setChecked(false);
+        // Bug KeepassDX #18
+        if (!mRememberKeyfile) {
+            keyFileView.setText("");
+            checkboxKeyfileView.setChecked(false);
+        }
     }
 
     private void retrieveSettings() {
@@ -282,12 +284,17 @@ public class PasswordActivity extends LockingActivity implements FingerPrintHelp
 
     private void populateView() {
         String db = (mDbUri == null) ? "" : mDbUri.toString();
-        if (!db.isEmpty())
-            filenameView.setText(db);
+        if (!db.isEmpty()) {
+            if (PrefsUtil.isFullFilePathEnable(this))
+                filenameView.setText(db);
+            else
+                filenameView.setText(new File(mDbUri.getPath()).getName()); // TODO Encapsulate
+        }
 
         String key = (mKeyUri == null) ? "" : mKeyUri.toString();
-        if (!key.isEmpty())
+        if (!key.isEmpty() && mRememberKeyfile) { // Bug KeepassDX #18
             keyFileView.setText(key);
+        }
     }
 
     // fingerprint related code here
@@ -643,13 +650,13 @@ public class PasswordActivity extends LockingActivity implements FingerPrintHelp
 
                     if (fileName.length() == 0) {
                         // No file name
-                        return R.string.FileNotFound;
+                        return R.string.file_not_found;
                     }
 
                     File dbFile = new File(fileName);
                     if (!dbFile.exists()) {
                         // File does not exist
-                        return R.string.FileNotFound;
+                        return R.string.file_not_found;
                     }
 
                     if (mKeyUri == null) {
