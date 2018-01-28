@@ -21,19 +21,19 @@ public abstract class BaseTest implements Driven {
 
     private static final String APPIUM_PROPERTIES_PATH = "/fe-tests/src/main/resources/appium.properties";
 
-    private Properties appiumProps;
-    private AppiumDriverLocalService service;
-    private MyDriver driver;
+    private static Properties appiumProps;
+    private static AppiumDriverLocalService service;
+    private static MyDriver driver;
 
     @BeforeClass
-    public void setUp() {
+    public static void setUp() {
         loadProperties();
         startService();
         initDriver(service.getUrl());
-        BasePage.setDriver(driver());
+        BasePage.setDriver(driver);
     }
 
-    private void loadProperties() {
+    private static void loadProperties() {
         File propertiesFile = new File(System.getProperty("user.dir") + APPIUM_PROPERTIES_PATH);
         appiumProps = new Properties();
         try {
@@ -43,7 +43,7 @@ public abstract class BaseTest implements Driven {
         }
     }
 
-    private void startService() {
+    private static void startService() {
         service = new AppiumServiceBuilder()
                 .withAppiumJS(new File(appiumProps.getProperty("mainJs")))
                 .build();
@@ -55,7 +55,7 @@ public abstract class BaseTest implements Driven {
         }
     }
 
-    private DesiredCapabilities buildCapabilities() {
+    private static DesiredCapabilities buildCapabilities() {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         for (String capabilityName : appiumProps.getProperty("usedCapabilities").split(",")) {
             capabilities.setCapability(capabilityName, appiumProps.getProperty(capabilityName));
@@ -63,18 +63,22 @@ public abstract class BaseTest implements Driven {
         return capabilities;
     }
 
-    private void initDriver(URL url) {
+    private static void initDriver(URL url) {
         driver = new MyDriver(url, buildCapabilities());
     }
 
     @AfterClass
-    public void tearDown() throws Exception {
+    public static void tearDown() throws Exception {
         if (driver != null) {
             driver.quit();
         }
         if (service != null) {
             service.stop();
         }
+    }
+
+    public static String adb() {
+        return appiumProps.getProperty("adb");
     }
 
     @Override
