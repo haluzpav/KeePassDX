@@ -13,16 +13,16 @@ public class Toolbar extends BasePage {
     private static final String MORE_OPTIONS_XPATH = "//android.widget.ImageView[@content-desc=\"More options\"]";
 
     @FindBy(id = "toolbar")
-    private WebElement toolbar;
+    protected WebElement toolbarContainer;
 
     public void click(ToolbarOption option) {
         try {
-            toolbar.findElement(By.id(option.id)).click();
+            toolbarContainer.findElement(By.id(option.id)).click();
             return;
         } catch (NoSuchElementException e) {
             // pass
         }
-        toolbar.findElement(By.xpath(MORE_OPTIONS_XPATH)).click();
+        toolbarContainer.findElement(By.xpath(MORE_OPTIONS_XPATH)).click();
         for (WebElement textElement : driver().findElements(By.className(CLASS_FIELD))) {
             if (!textElement.getText().toLowerCase().contains(option.text)) continue;
             textElement.click();
@@ -30,12 +30,20 @@ public class Toolbar extends BasePage {
         }
     }
 
+    protected WebElement getBackElement() {
+        throw new NoSuchElementException("back not defined");
+    }
+
     protected WebElement getIconElement() {
         throw new NoSuchElementException("icon not defined");
     }
 
     protected WebElement getTitleElement() {
-        return toolbar.findElement(By.className(CLASS_FIELD));
+        return toolbarContainer.findElement(By.className(CLASS_FIELD));
+    }
+
+    public void goBack() {
+        getBackElement().click();
     }
 
     public boolean isIconPresent() {

@@ -8,7 +8,7 @@ import org.junit.runners.MethodSorters;
 import eu.haluzpav.fetests.tests.process.open_database.BaseDbProcessTest;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class T1_OpenDefaultDatabaseWrongPass extends BaseDbProcessTest {
+public class T1_DefaultWrongPass extends BaseDbProcessTest {
 
     @Test
     public void s00_isAppOpened() {

@@ -7,6 +7,11 @@ abstract class BaseScreen extends BasePage {
 
     private Toolbar toolbar;
 
+    BaseScreen() {
+        super();
+        toolbar = createToolbar();
+    }
+
     protected Toolbar createToolbar() {
         return new Toolbar();
     }

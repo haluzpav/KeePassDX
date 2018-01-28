@@ -7,7 +7,6 @@ import org.openqa.selenium.support.FindBy;
 import java.util.Arrays;
 import java.util.List;
 
-import eu.haluzpav.fetests.model.toolbar.GroupToolbar;
 import eu.haluzpav.fetests.model.toolbar.Toolbar;
 
 public class GroupScreen extends BaseScreen {
@@ -31,7 +30,23 @@ public class GroupScreen extends BaseScreen {
 
     @Override
     protected Toolbar createToolbar() {
-        return new GroupToolbar();
+        return new Toolbar() {
+            @FindBy(id = "icon")
+            private WebElement icon;
+
+            @FindBy(id = "group_name")
+            private WebElement title;
+
+            @Override
+            protected WebElement getIconElement() {
+                return icon;
+            }
+
+            @Override
+            protected WebElement getTitleElement() {
+                return title;
+            }
+        };
     }
 
     public void clickFirstGroup() {

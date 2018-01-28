@@ -1,12 +1,18 @@
 package eu.haluzpav.fetests.model.screens;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.Arrays;
 import java.util.List;
 
+import eu.haluzpav.fetests.model.toolbar.Toolbar;
+
 public class EnterDbPassScreen extends BaseScreen {
+
+    // TODO remove language dependency
+    private static final String BACK_XPATH = "//android.widget.ImageButton[@content-desc=\"Navigate up\"]";
 
     @FindBy(id = "password")
     private WebElement passwordField;
@@ -47,5 +53,15 @@ public class EnterDbPassScreen extends BaseScreen {
     @Override
     protected List<WebElement> uniqueElements() {
         return Arrays.asList(passwordField, defaultDbSwitch, confirmButton);
+    }
+
+    @Override
+    protected Toolbar createToolbar() {
+        return new Toolbar() {
+            @Override
+            protected WebElement getBackElement() {
+                return toolbarContainer.findElement(By.xpath(BACK_XPATH));
+            }
+        };
     }
 }

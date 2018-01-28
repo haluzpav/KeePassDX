@@ -3,7 +3,10 @@ package eu.haluzpav.fetests.model.dialogs;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class CreateDbScreen extends BaseDialog {
+import java.util.Arrays;
+import java.util.List;
+
+public class CreateDbPathScreen extends BaseDialog {
 
     @FindBy(id = "folder_path")
     private WebElement folderField;
@@ -16,6 +19,11 @@ public class CreateDbScreen extends BaseDialog {
 
     @FindBy(id = "file_types")
     private WebElement fileTypeSelector;
+
+    @Override
+    protected List<WebElement> uniqueElements() {
+        return Arrays.asList(folderField, filenameField);
+    }
 
     public void enterPath(String path) {
         fillField(folderField, path);

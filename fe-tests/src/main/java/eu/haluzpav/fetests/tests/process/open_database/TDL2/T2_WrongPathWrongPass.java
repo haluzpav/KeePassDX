@@ -8,7 +8,7 @@ import org.junit.runners.MethodSorters;
 import eu.haluzpav.fetests.tests.process.open_database.BaseDbProcessTest;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class T2_OpenDatabaseWrongPath extends BaseDbProcessTest {
+public class T2_WrongPathWrongPass extends BaseDbProcessTest {
 
     @Test
     public void s00_isAppOpened() {
@@ -17,7 +17,7 @@ public class T2_OpenDatabaseWrongPath extends BaseDbProcessTest {
 
     @Test
     public void s01_isNotOnDefault() {
-        Assert.assertFalse(isOnDefault());
+        tryGoToOpenDbScreenTest();
     }
 
     @Test
@@ -37,17 +37,17 @@ public class T2_OpenDatabaseWrongPath extends BaseDbProcessTest {
 
     @Test
     public void s05_enterWrongPath() {
-        enterWrongPathTest(databasePath + "bananas");
+        enterWrongPathTest(defaultDatabasePath + "bananas");
     }
 
     @Test
     public void s06_enterWrongPath() {
-        enterWrongPathTest(databasePath + "zeman zas vyhral");
+        enterWrongPathTest(defaultDatabasePath + "zeman zas vyhral");
     }
 
     @Test
     public void s07_enterCorrectPath() {
-        enterCorrectPathTest(databasePath);
+        enterCorrectPathTest(defaultDatabasePath);
     }
 
     @Test
