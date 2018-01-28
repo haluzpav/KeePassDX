@@ -27,15 +27,14 @@ public class OpenDbScreen extends BaseScreen {
         return fileSelectContainer.findElement(By.className(CLASS_FIELD_EDIT));
     }
 
-    public void tryOpenDatabase(String path) throws IllegalStateException {
+    public boolean enterDbPath(String path) {
         getPathField().clear();
         getPathField().sendKeys(path);
-        openDatabaseButton.click();
+        return !getPathField().getText().isEmpty();
+    }
 
-        // TODO read toast massage
-        if (openDatabaseButton.isDisplayed()) {
-            throw new IllegalStateException("database was not opened");
-        }
+    public void openDbFromPath() {
+        openDatabaseButton.click();
     }
 
     public void openFirstRecent() {
