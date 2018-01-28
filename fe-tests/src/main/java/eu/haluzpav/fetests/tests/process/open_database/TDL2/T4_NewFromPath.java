@@ -13,7 +13,7 @@ import eu.haluzpav.fetests.model.screens.OpenDbScreen;
 import eu.haluzpav.fetests.tests.process.open_database.BaseDbProcessTest;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class T4_New extends BaseDbProcessTest {
+public class T4_NewFromPath extends BaseDbProcessTest {
 
     private static String randomFilename = String.valueOf(new Random().nextInt()) + ".kdbx";
 
@@ -29,7 +29,7 @@ public class T4_New extends BaseDbProcessTest {
 
     @Test
     public void s02_databaseExists() {
-        Assert.assertTrue(databaseExists());
+        databaseExistsTest();
     }
 
     @Test

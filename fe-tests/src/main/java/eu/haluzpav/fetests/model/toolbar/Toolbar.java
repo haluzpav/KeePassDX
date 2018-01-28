@@ -2,6 +2,7 @@ package eu.haluzpav.fetests.model.toolbar;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -19,7 +20,7 @@ public class Toolbar extends BasePage {
         try {
             toolbarContainer.findElement(By.id(option.id)).click();
             return;
-        } catch (NoSuchElementException e) {
+        } catch (WebDriverException e) {
             // pass
         }
         toolbarContainer.findElement(By.xpath(MORE_OPTIONS_XPATH)).click();

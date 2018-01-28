@@ -1,6 +1,5 @@
 package eu.haluzpav.fetests.tests.process.open_database.TDL2;
 
-import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
@@ -22,7 +21,7 @@ public class T3_FromListWrongPass extends BaseDbProcessTest {
 
     @Test
     public void s02_databaseExists() {
-        Assert.assertTrue(databaseExists());
+        databaseExistsTest();
     }
 
     @Test

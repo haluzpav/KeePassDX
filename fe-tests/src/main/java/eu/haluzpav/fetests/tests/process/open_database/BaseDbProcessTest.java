@@ -21,6 +21,7 @@ public abstract class BaseDbProcessTest extends BaseTest {
     protected static final String validPassword = "a";
     protected static final List<String> invalidPasswords = Collections.unmodifiableList(Arrays.asList(
             "Trautenberg666", "4 8 15 16 23 42", "bananas?"));
+
     protected static OpenDbScreen openDbScreen;
     protected static EnterDbPassScreen enterDbPassScreen;
     protected static CreateDbPathScreen createDbPathScreen;
@@ -28,7 +29,8 @@ public abstract class BaseDbProcessTest extends BaseTest {
     protected static GroupScreen groupScreen;
 
     protected void isAppOpenedTest() {
-        // TODO
+        // TODO isAppOpenedTest
+        Assert.fail("TODO isAppOpenedTest");
     }
 
     private boolean isOnOpenDb() {
@@ -76,9 +78,9 @@ public abstract class BaseDbProcessTest extends BaseTest {
         Assert.assertTrue(isOnOpenDb());
     }
 
-    protected boolean databaseExists() {
-        // TODO always exists?
-        return true;
+    protected void databaseExistsTest() {
+        // TODO databaseExistsTest
+        Assert.fail("TODO databaseExistsTest");
     }
 
     protected boolean isOnEnterPass() {
@@ -88,7 +90,7 @@ public abstract class BaseDbProcessTest extends BaseTest {
 
     private void enterPassAndConfirm(String pass) {
         boolean entered = enterDbPassScreen.enterPassword(pass);
-        Assert.assertTrue(entered);
+        if (!pass.isEmpty()) Assert.assertTrue(entered);
 
         enterDbPassScreen.confirm();
     }

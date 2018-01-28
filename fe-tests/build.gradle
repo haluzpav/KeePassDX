@@ -1,5 +1,11 @@
 apply plugin: 'java-library'
 
+compileJava.options.encoding = 'UTF-8'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     compile 'junit:junit:4.12'
