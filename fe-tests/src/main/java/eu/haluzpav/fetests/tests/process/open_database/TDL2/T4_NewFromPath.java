@@ -34,6 +34,11 @@ public class T4_NewFromPath extends BaseDbProcessTest {
     }
 
     @Test
+    public void s00_isAppOpened() {
+        isAppOpenedTest();
+    }
+
+    @Test
     public void s01_isNotOnDefault() {
         tryGoToOpenDbScreenTest();
     }

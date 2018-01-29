@@ -27,6 +27,11 @@ public class T3_FromListWrongPass extends BaseDbProcessTest {
     }
 
     @Test
+    public void s00_isAppOpened() {
+        isAppOpenedTest();
+    }
+
+    @Test
     public void s01_isNotOnDefault() {
         tryGoToOpenDbScreenTest();
     }

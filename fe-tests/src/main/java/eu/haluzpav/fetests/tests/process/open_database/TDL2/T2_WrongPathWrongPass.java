@@ -36,6 +36,11 @@ public class T2_WrongPathWrongPass extends BaseDbProcessTest {
     }
 
     @Test
+    public void s00_isAppOpened() {
+        isAppOpenedTest();
+    }
+
+    @Test
     public void s01_isNotOnDefault() {
         tryGoToOpenDbScreenTest();
     }

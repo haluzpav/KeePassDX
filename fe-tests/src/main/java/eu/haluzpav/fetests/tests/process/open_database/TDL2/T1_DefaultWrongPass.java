@@ -31,6 +31,11 @@ public class T1_DefaultWrongPass extends BaseDbProcessTest {
     }
 
     @Test
+    public void s00_isAppOpened() {
+        isAppOpenedTest();
+    }
+
+    @Test
     public void s01_isOnDefault() {
         Assert.assertTrue(isOnDefault());
 

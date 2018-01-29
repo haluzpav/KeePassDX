@@ -31,7 +31,7 @@ public abstract class BaseDbProcessTest extends BaseTest {
 
     private void openDatabase(String path) {
         boolean entered = openDbScreen.enterDbPath(path);
-        Assert.assertTrue(entered);
+        if (!path.isEmpty()) Assert.assertTrue(entered);
 
         openDbScreen.openDbFromPath();
     }
@@ -114,11 +114,6 @@ public abstract class BaseDbProcessTest extends BaseTest {
     protected boolean isOnGroup() {
         if (groupScreen == null) groupScreen = new GroupScreen();
         return groupScreen.isOpened();
-    }
-
-    @Test
-    public void s00_isAppOpened() {
-        isAppOpenedTest();
     }
 
     @Test

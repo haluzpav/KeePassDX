@@ -58,6 +58,11 @@ public class T5_NewWrongPathWrongPassFromList extends BaseDbProcessTest {
     }
 
     @Test
+    public void s00_isAppOpened() {
+        isAppOpenedTest();
+    }
+
+    @Test
     public void s01_isNotOnDefault() {
         tryGoToOpenDbScreenTest();
     }
