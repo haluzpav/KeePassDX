@@ -8,9 +8,9 @@ public class T1_Data extends BaseData {
     @Override
     public Collection<Object[]> data() {
         return Arrays.asList(new Object[][]{
-                {invalidPasswords.poll(), invalidPasswords.poll(), validPassword},
-                {invalidPasswords.poll(), invalidPasswords.poll(), validPassword},
-                {invalidPasswords.poll(), invalidPasswords.poll(), validPassword},
+                {wrongPasswords.poll(), wrongPasswords.poll(), validPassword},
+                {wrongPasswords.poll(), wrongPasswords.poll(), validPassword},
+                {wrongPasswords.poll(), wrongPasswords.poll(), validPassword},
         });
     }
 
