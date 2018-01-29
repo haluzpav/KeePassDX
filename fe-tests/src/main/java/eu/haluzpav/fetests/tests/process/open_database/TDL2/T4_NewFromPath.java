@@ -3,23 +3,34 @@ package eu.haluzpav.fetests.tests.process.open_database.TDL2;
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
+import org.junit.runners.Parameterized;
 
-import java.util.Random;
+import java.util.Collection;
 
 import eu.haluzpav.fetests.model.dialogs.CreateDbPassScreen;
 import eu.haluzpav.fetests.model.dialogs.CreateDbPathScreen;
 import eu.haluzpav.fetests.model.screens.OpenDbScreen;
 import eu.haluzpav.fetests.tests.process.open_database.BaseDbProcessTest;
+import eu.haluzpav.fetests.tests.process.open_database.TDL2.data.T4_Data;
 
+@RunWith(Parameterized.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class T4_NewFromPath extends BaseDbProcessTest {
 
-    private static String randomFilename = String.valueOf(new Random().nextInt()) + ".kdbx";
+    @Parameterized.Parameter(0)
+    public String dbPathRoot;
 
-    @Test
-    public void s00_isAppOpened() {
-        isAppOpenedTest();
+    @Parameterized.Parameter(1)
+    public String dbPathFilename;
+
+    @Parameterized.Parameter(2)
+    public String validPassword;
+
+    @Parameterized.Parameters
+    public static Collection<Object[]> data() {
+        return new T4_Data().data();
     }
 
     @Test
@@ -48,8 +59,8 @@ public class T4_NewFromPath extends BaseDbProcessTest {
 
     @Test
     public void s05_createPath() {
-        createDbPathScreen.enterPath(databaseRoot);
-        createDbPathScreen.enterFilename(randomFilename);
+        createDbPathScreen.enterPath(dbPathRoot);
+        createDbPathScreen.enterFilename(dbPathFilename);
         createDbPathScreen.confirm();
 
         createDbPassScreen = new CreateDbPassScreen();
@@ -67,11 +78,6 @@ public class T4_NewFromPath extends BaseDbProcessTest {
         Assert.assertTrue(openDbScreen.isOpened());
     }
 
-//    @Test
-//    public void s08_chooseFromList() {
-//        chooseFromListTest(0);
-//    }
-
     @Test
     public void s07_choosePath() {
         // nothing to test
@@ -79,7 +85,7 @@ public class T4_NewFromPath extends BaseDbProcessTest {
 
     @Test
     public void s08_enterPath() {
-        enterCorrectPathTest(databaseRoot + randomFilename);
+        enterCorrectPathTest(dbPathRoot + dbPathFilename);
     }
 
     @Test

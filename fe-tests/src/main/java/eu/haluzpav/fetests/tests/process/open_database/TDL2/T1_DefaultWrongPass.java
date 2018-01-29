@@ -9,7 +9,6 @@ import org.junit.runners.Parameterized;
 
 import java.util.Collection;
 
-import eu.haluzpav.fetests.model.toolbar.ToolbarOption;
 import eu.haluzpav.fetests.tests.process.open_database.BaseDbProcessTest;
 import eu.haluzpav.fetests.tests.process.open_database.TDL2.data.T1_Data;
 
@@ -26,14 +25,9 @@ public class T1_DefaultWrongPass extends BaseDbProcessTest {
     @Parameterized.Parameter(2)
     public String validPassword;
 
-    @Parameterized.Parameters(name = "{index}: \"{0}\", \"{1}\", \"{2}\"")
+    @Parameterized.Parameters(name = "{index}: wrongs=[\"{0}\", \"{1}\"], correct=\"{2}\"")
     public static Collection<Object[]> data() {
         return new T1_Data().data();
-    }
-
-    @Test
-    public void s00_isAppOpened() {
-        isAppOpenedTest();
     }
 
     @Test
@@ -56,13 +50,6 @@ public class T1_DefaultWrongPass extends BaseDbProcessTest {
     @Test
     public void s04_enterCorrectPass() {
         enterCorrectPassTest(validPassword);
-    }
-
-    @Test
-    public void s99_goToStart() {
-        // need to go back manually because Parametrized runner does not restart app
-        groupScreen.toolbar().click(ToolbarOption.LOCK_DB);
-        Assert.assertTrue(isOnEnterPass());
     }
 
 }

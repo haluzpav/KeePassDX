@@ -1,26 +1,17 @@
 package eu.haluzpav.fetests.tests.process.open_database;
 
 import org.junit.Assert;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import org.junit.Test;
 
 import eu.haluzpav.fetests.model.dialogs.CreateDbPassScreen;
 import eu.haluzpav.fetests.model.dialogs.CreateDbPathScreen;
 import eu.haluzpav.fetests.model.screens.EnterDbPassScreen;
 import eu.haluzpav.fetests.model.screens.GroupScreen;
 import eu.haluzpav.fetests.model.screens.OpenDbScreen;
+import eu.haluzpav.fetests.model.toolbar.ToolbarOption;
 import eu.haluzpav.fetests.tests.BaseTest;
 
 public abstract class BaseDbProcessTest extends BaseTest {
-
-    // TODO parametrize
-    protected static final String databaseRoot = "/storage/emulated/0/keepass/";
-    protected static final String defaultDatabasePath = databaseRoot + "keepass.kdbx";
-    protected static final String validPassword = "a";
-    protected static final List<String> invalidPasswords = Collections.unmodifiableList(Arrays.asList(
-            "Trautenberg666", "4 8 15 16 23 42", "bananas?"));
 
     protected static OpenDbScreen openDbScreen;
     protected static EnterDbPassScreen enterDbPassScreen;
@@ -109,9 +100,32 @@ public abstract class BaseDbProcessTest extends BaseTest {
         Assert.assertTrue(isOnGroup());
     }
 
+    protected void enterCreatePath(String root, String filename) {
+        createDbPathScreen.enterPath(root);
+        createDbPathScreen.enterFilename(filename);
+        createDbPathScreen.confirm();
+    }
+
+    public void enterCreatePass(String pass, String confirmPass) {
+        createDbPassScreen.enterPassword(pass, confirmPass);
+        createDbPassScreen.confirm();
+    }
+
     protected boolean isOnGroup() {
         if (groupScreen == null) groupScreen = new GroupScreen();
         return groupScreen.isOpened();
+    }
+
+    @Test
+    public void s00_isAppOpened() {
+        isAppOpenedTest();
+    }
+
+    @Test
+    public void s90_goToStart() {
+        // need to go back manually because Parametrized runner does not restart app
+        groupScreen.toolbar().click(ToolbarOption.LOCK_DB);
+        Assert.assertTrue(isOnEnterPass());
     }
 
 }

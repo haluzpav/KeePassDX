@@ -2,16 +2,28 @@ package eu.haluzpav.fetests.tests.process.open_database.TDL2;
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
+import org.junit.runners.Parameterized;
+
+import java.util.Collection;
 
 import eu.haluzpav.fetests.tests.process.open_database.BaseDbProcessTest;
+import eu.haluzpav.fetests.tests.process.open_database.TDL2.data.T3_Data;
 
+@RunWith(Parameterized.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class T3_FromListWrongPass extends BaseDbProcessTest {
 
-    @Test
-    public void s00_isAppOpened() {
-        isAppOpenedTest();
+    @Parameterized.Parameter(0)
+    public String invalidPassword;
+
+    @Parameterized.Parameter(2)
+    public String validPassword;
+
+    @Parameterized.Parameters
+    public static Collection<Object[]> data() {
+        return new T3_Data().data();
     }
 
     @Test
@@ -36,7 +48,7 @@ public class T3_FromListWrongPass extends BaseDbProcessTest {
 
     @Test
     public void s05_enterWrongPass() {
-        enterWrongPassTest(invalidPasswords.get(0));
+        enterWrongPassTest(invalidPassword);
     }
 
     @Test
