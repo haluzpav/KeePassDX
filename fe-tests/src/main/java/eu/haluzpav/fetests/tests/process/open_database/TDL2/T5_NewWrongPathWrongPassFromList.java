@@ -9,6 +9,7 @@ import org.junit.runners.Parameterized;
 
 import java.util.Collection;
 
+import eu.haluzpav.fetests.model.dialogs.BaseDialog;
 import eu.haluzpav.fetests.model.dialogs.CreateDbPassScreen;
 import eu.haluzpav.fetests.model.dialogs.CreateDbPathScreen;
 import eu.haluzpav.fetests.model.screens.OpenDbScreen;
@@ -52,7 +53,7 @@ public class T5_NewWrongPathWrongPassFromList extends BaseDbProcessTest {
     @Parameterized.Parameter(10)
     public String validPassword;
 
-    @Parameterized.Parameters(name = "{index}: wrongs=[\"{0}\", \"{1}\"], correct=\"{2}\"")
+    @Parameterized.Parameters
     public static Collection<Object[]> data() {
         return new T5_Data().data();
     }
@@ -110,6 +111,11 @@ public class T5_NewWrongPathWrongPassFromList extends BaseDbProcessTest {
     public void s07_createInvalidPass1() {
         enterCreatePass(invalidPassword1, invalidConfirmPassword1);
 
+        BaseDialog confirmEmptyDialog = new BaseDialog();
+        if (confirmEmptyDialog.isOpened()) {
+            confirmEmptyDialog.cancel();
+            Assert.fail();
+        }
         Assert.assertTrue(createDbPassScreen.isOpened());
     }
 
@@ -117,6 +123,11 @@ public class T5_NewWrongPathWrongPassFromList extends BaseDbProcessTest {
     public void s08_createInvalidPass2() {
         enterCreatePass(invalidPassword2, invalidConfirmPassword2);
 
+        BaseDialog confirmEmptyDialog = new BaseDialog();
+        if (confirmEmptyDialog.isOpened()) {
+            confirmEmptyDialog.cancel();
+            Assert.fail();
+        }
         Assert.assertTrue(createDbPassScreen.isOpened());
     }
 
@@ -124,6 +135,17 @@ public class T5_NewWrongPathWrongPassFromList extends BaseDbProcessTest {
     public void s09_createValidPass() {
         enterCreatePass(validPassword, validPassword);
 
+        BaseDialog confirmEmptyDialog = new BaseDialog();
+        if (confirmEmptyDialog.isOpened()) {
+            if (validPassword.isEmpty()) {
+                confirmEmptyDialog.confirm();
+            } else {
+                confirmEmptyDialog.cancel();
+                createDbPassScreen = new CreateDbPassScreen();
+                createDbPassScreen.cancel(); // close for consistency
+                Assert.fail();
+            }
+        }
         openDbScreen = new OpenDbScreen();
         Assert.assertFalse(createDbPassScreen.isOpened());
         Assert.assertTrue(openDbScreen.isOpened());

@@ -56,6 +56,10 @@ public abstract class BasePage implements Driven {
         }
     }
 
+    /**
+     * List of elements unique for the screen. No other screen should have all these elements.
+     * Used to determine which screen is opened.
+     */
     protected List<WebElement> uniqueElements() {
         throw new IllegalStateException("not implemented");
     }

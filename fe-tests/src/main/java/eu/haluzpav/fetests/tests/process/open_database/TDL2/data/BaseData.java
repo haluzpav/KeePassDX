@@ -15,6 +15,7 @@ public abstract class BaseData {
     static final String validDbFilename = "keepass.kdbx";
     static final String emptyDbFilename = "";
     static final String defaultDatabasePath = validDbRoot + validDbFilename;
+    final static String emptyPassword = "";
     final Queue<String> invalidCharsDbRoot = new LinkedList<>(Arrays.asList(
             "/storage/emulated/0/keepass/ɐıʃɐɹʇsnɐ/",
             "/storage/emulated/0/keepass/\uD83C\uDDEA\uD83C\uDDFA/"
@@ -36,7 +37,7 @@ public abstract class BaseData {
                     .collect(Collectors.toList())
     );
     final Queue<String> wrongPasswords = new LinkedList<>(Arrays.asList(
-            "",
+            emptyPassword,
             "zEman!!%&*$!&",
             "beruška",
             "Trautenberg666",
