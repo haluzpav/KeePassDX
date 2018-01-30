@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import java.util.Arrays;
 import java.util.List;
 
-public class CreateDbPathScreen extends BaseDialog {
+public class CreateDbPathDialog extends BaseDialog {
 
     @FindBy(id = "folder_path")
     private WebElement folderField;

@@ -9,7 +9,7 @@ import java.util.List;
 
 import io.appium.java_client.android.AndroidElement;
 
-public class CreateDbPassScreen extends BaseDialog {
+public class CreateDbPassDialog extends BaseDialog {
 
     // TODO remove language dependency
     private static final String VISIBILITY_BUTTON_XPATH = "//android.widget.ImageButton[@content-desc=\"Toggle password visibility\"]";

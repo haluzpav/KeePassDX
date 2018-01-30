@@ -10,8 +10,8 @@ import org.junit.runners.Parameterized;
 import java.util.Collection;
 
 import eu.haluzpav.fetests.model.dialogs.BaseDialog;
-import eu.haluzpav.fetests.model.dialogs.CreateDbPassScreen;
-import eu.haluzpav.fetests.model.dialogs.CreateDbPathScreen;
+import eu.haluzpav.fetests.model.dialogs.CreateDbPassDialog;
+import eu.haluzpav.fetests.model.dialogs.CreateDbPathDialog;
 import eu.haluzpav.fetests.model.screens.OpenDbScreen;
 import eu.haluzpav.fetests.tests.process.open_database.BaseDbProcessTest;
 import eu.haluzpav.fetests.tests.process.open_database.TDL2.data.T5_Data;
@@ -78,33 +78,33 @@ public class T5_NewWrongPathWrongPassFromList extends BaseDbProcessTest {
     public void s03_openCreate() {
         openDbScreen.openCreateDatabase();
 
-        createDbPathScreen = new CreateDbPathScreen();
+        createDbPathDialog = new CreateDbPathDialog();
 
-        Assert.assertTrue(createDbPathScreen.isOpened());
+        Assert.assertTrue(createDbPathDialog.isOpened());
     }
 
     @Test
     public void s04_createWrongPath1() {
         enterCreatePath(wrongDbPathRoot1, wrongDbPathFilename1);
 
-        Assert.assertTrue(createDbPathScreen.isOpened());
+        Assert.assertTrue(createDbPathDialog.isOpened());
     }
 
     @Test
     public void s05_createWrongPath2() {
         enterCreatePath(wrongDbPathRoot2, wrongDbPathFilename2);
 
-        Assert.assertTrue(createDbPathScreen.isOpened());
+        Assert.assertTrue(createDbPathDialog.isOpened());
     }
 
     @Test
     public void s06_createCorrectPath() {
         enterCreatePath(correctDbPathRoot, correctDbPathFilename);
 
-        createDbPassScreen = new CreateDbPassScreen();
+        createDbPassDialog = new CreateDbPassDialog();
 
-        Assert.assertFalse(createDbPathScreen.isOpened());
-        Assert.assertTrue(createDbPassScreen.isOpened());
+        Assert.assertFalse(createDbPathDialog.isOpened());
+        Assert.assertTrue(createDbPassDialog.isOpened());
     }
 
     @Test
@@ -116,7 +116,7 @@ public class T5_NewWrongPathWrongPassFromList extends BaseDbProcessTest {
             confirmEmptyDialog.cancel();
             Assert.fail();
         }
-        Assert.assertTrue(createDbPassScreen.isOpened());
+        Assert.assertTrue(createDbPassDialog.isOpened());
     }
 
     @Test
@@ -128,7 +128,7 @@ public class T5_NewWrongPathWrongPassFromList extends BaseDbProcessTest {
             confirmEmptyDialog.cancel();
             Assert.fail();
         }
-        Assert.assertTrue(createDbPassScreen.isOpened());
+        Assert.assertTrue(createDbPassDialog.isOpened());
     }
 
     @Test
@@ -141,13 +141,13 @@ public class T5_NewWrongPathWrongPassFromList extends BaseDbProcessTest {
                 confirmEmptyDialog.confirm();
             } else {
                 confirmEmptyDialog.cancel();
-                createDbPassScreen = new CreateDbPassScreen();
-                createDbPassScreen.cancel(); // close for consistency
+                createDbPassDialog = new CreateDbPassDialog();
+                createDbPassDialog.cancel(); // close for consistency
                 Assert.fail();
             }
         }
         openDbScreen = new OpenDbScreen();
-        Assert.assertFalse(createDbPassScreen.isOpened());
+        Assert.assertFalse(createDbPassDialog.isOpened());
         Assert.assertTrue(openDbScreen.isOpened());
     }
 

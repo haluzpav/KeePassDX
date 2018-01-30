@@ -3,8 +3,8 @@ package eu.haluzpav.fetests.tests.process.open_database;
 import org.junit.Assert;
 import org.junit.Test;
 
-import eu.haluzpav.fetests.model.dialogs.CreateDbPassScreen;
-import eu.haluzpav.fetests.model.dialogs.CreateDbPathScreen;
+import eu.haluzpav.fetests.model.dialogs.CreateDbPassDialog;
+import eu.haluzpav.fetests.model.dialogs.CreateDbPathDialog;
 import eu.haluzpav.fetests.model.screens.EnterDbPassScreen;
 import eu.haluzpav.fetests.model.screens.GroupScreen;
 import eu.haluzpav.fetests.model.screens.OpenDbScreen;
@@ -15,8 +15,8 @@ public abstract class BaseDbProcessTest extends BaseTest {
 
     protected static OpenDbScreen openDbScreen;
     protected static EnterDbPassScreen enterDbPassScreen;
-    protected static CreateDbPathScreen createDbPathScreen;
-    protected static CreateDbPassScreen createDbPassScreen;
+    protected static CreateDbPathDialog createDbPathDialog;
+    protected static CreateDbPassDialog createDbPassDialog;
     protected static GroupScreen groupScreen;
 
     protected void isAppOpenedTest() {
@@ -101,14 +101,14 @@ public abstract class BaseDbProcessTest extends BaseTest {
     }
 
     protected void enterCreatePath(String root, String filename) {
-        createDbPathScreen.enterPath(root);
-        createDbPathScreen.enterFilename(filename);
-        createDbPathScreen.confirm();
+        createDbPathDialog.enterPath(root);
+        createDbPathDialog.enterFilename(filename);
+        createDbPathDialog.confirm();
     }
 
     public void enterCreatePass(String pass, String confirmPass) {
-        createDbPassScreen.enterPassword(pass, confirmPass);
-        createDbPassScreen.confirm();
+        createDbPassDialog.enterPassword(pass, confirmPass);
+        createDbPassDialog.confirm();
     }
 
     protected boolean isOnGroup() {

@@ -11,6 +11,7 @@ import eu.haluzpav.fetests.model.BasePage;
 public class Toolbar extends BasePage {
 
     // TODO remove language dependency
+    private static final String BACK_XPATH = "//android.widget.ImageButton[@content-desc=\"Navigate up\"]";
     private static final String MORE_OPTIONS_XPATH = "//android.widget.ImageView[@content-desc=\"More options\"]";
 
     @FindBy(id = "toolbar")
@@ -32,7 +33,7 @@ public class Toolbar extends BasePage {
     }
 
     protected WebElement getBackElement() {
-        throw new NoSuchElementException("back not defined");
+        return toolbarContainer.findElement(By.xpath(BACK_XPATH));
     }
 
     protected WebElement getIconElement() {

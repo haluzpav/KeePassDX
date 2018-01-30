@@ -9,8 +9,8 @@ import org.junit.runners.Parameterized;
 
 import java.util.Collection;
 
-import eu.haluzpav.fetests.model.dialogs.CreateDbPassScreen;
-import eu.haluzpav.fetests.model.dialogs.CreateDbPathScreen;
+import eu.haluzpav.fetests.model.dialogs.CreateDbPassDialog;
+import eu.haluzpav.fetests.model.dialogs.CreateDbPathDialog;
 import eu.haluzpav.fetests.model.screens.OpenDbScreen;
 import eu.haluzpav.fetests.tests.process.open_database.BaseDbProcessTest;
 import eu.haluzpav.fetests.tests.process.open_database.TDL2.data.T4_Data;
@@ -57,27 +57,27 @@ public class T4_NewFromPath extends BaseDbProcessTest {
     public void s04_openCreate() {
         openDbScreen.openCreateDatabase();
 
-        createDbPathScreen = new CreateDbPathScreen();
+        createDbPathDialog = new CreateDbPathDialog();
 
-        Assert.assertTrue(createDbPathScreen.isOpened());
+        Assert.assertTrue(createDbPathDialog.isOpened());
     }
 
     @Test
     public void s05_createPath() {
-        createDbPathScreen.enterPath(dbPathRoot);
-        createDbPathScreen.enterFilename(dbPathFilename);
-        createDbPathScreen.confirm();
+        createDbPathDialog.enterPath(dbPathRoot);
+        createDbPathDialog.enterFilename(dbPathFilename);
+        createDbPathDialog.confirm();
 
-        createDbPassScreen = new CreateDbPassScreen();
+        createDbPassDialog = new CreateDbPassDialog();
 
-        Assert.assertFalse(createDbPathScreen.isOpened());
-        Assert.assertTrue(createDbPassScreen.isOpened());
+        Assert.assertFalse(createDbPathDialog.isOpened());
+        Assert.assertTrue(createDbPassDialog.isOpened());
     }
 
     @Test
     public void s06_createPass() {
-        createDbPassScreen.enterPassword(validPassword, validPassword);
-        createDbPassScreen.confirm();
+        createDbPassDialog.enterPassword(validPassword, validPassword);
+        createDbPassDialog.confirm();
 
         openDbScreen = new OpenDbScreen();
         Assert.assertTrue(openDbScreen.isOpened());
