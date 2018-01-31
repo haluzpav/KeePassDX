@@ -4,7 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class PassGeneratorDialog extends BaseDialog {
+import java.util.Arrays;
+import java.util.List;
+
+public class PassGeneratorDialog extends BaseOptionsDialog {
 
     // TODO slider
 
@@ -48,5 +51,10 @@ public class PassGeneratorDialog extends BaseDialog {
     public String generatePass() {
         genButton.click();
         return passField.getText();
+    }
+
+    @Override
+    protected List<WebElement> uniqueElements() {
+        return Arrays.asList(passField, genButton);
     }
 }

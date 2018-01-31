@@ -9,7 +9,7 @@ import org.junit.runners.Parameterized;
 
 import java.util.Collection;
 
-import eu.haluzpav.fetests.model.dialogs.BaseDialog;
+import eu.haluzpav.fetests.model.dialogs.BaseOptionsDialog;
 import eu.haluzpav.fetests.model.dialogs.CreateDbPassDialog;
 import eu.haluzpav.fetests.model.dialogs.CreateDbPathDialog;
 import eu.haluzpav.fetests.model.screens.OpenDbScreen;
@@ -111,7 +111,7 @@ public class T5_NewWrongPathWrongPassFromList extends BaseDbProcessTest {
     public void s07_createInvalidPass1() {
         enterCreatePass(invalidPassword1, invalidConfirmPassword1);
 
-        BaseDialog confirmEmptyDialog = new BaseDialog();
+        BaseOptionsDialog confirmEmptyDialog = new BaseOptionsDialog();
         if (confirmEmptyDialog.isOpened()) {
             confirmEmptyDialog.cancel();
             Assert.fail();
@@ -123,7 +123,7 @@ public class T5_NewWrongPathWrongPassFromList extends BaseDbProcessTest {
     public void s08_createInvalidPass2() {
         enterCreatePass(invalidPassword2, invalidConfirmPassword2);
 
-        BaseDialog confirmEmptyDialog = new BaseDialog();
+        BaseOptionsDialog confirmEmptyDialog = new BaseOptionsDialog();
         if (confirmEmptyDialog.isOpened()) {
             confirmEmptyDialog.cancel();
             Assert.fail();
@@ -135,7 +135,7 @@ public class T5_NewWrongPathWrongPassFromList extends BaseDbProcessTest {
     public void s09_createValidPass() {
         enterCreatePass(validPassword, validPassword);
 
-        BaseDialog confirmEmptyDialog = new BaseDialog();
+        BaseOptionsDialog confirmEmptyDialog = new BaseOptionsDialog();
         if (confirmEmptyDialog.isOpened()) {
             if (validPassword.isEmpty()) {
                 confirmEmptyDialog.confirm();

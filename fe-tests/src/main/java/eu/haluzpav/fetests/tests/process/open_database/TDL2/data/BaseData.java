@@ -10,12 +10,13 @@ import java.util.stream.Collectors;
 public abstract class BaseData {
 
     public static final String validPassword = "a";
-    static final String validDbRoot = "/storage/emulated/0/keepass/";
-    static final String emptyDbRoot = "";
-    static final String validDbFilename = "keepass.kdbx";
-    static final String emptyDbFilename = "";
-    static final String defaultDatabasePath = validDbRoot + validDbFilename;
-    final static String emptyPassword = "";
+    public static final String validDbRoot = "/storage/emulated/0/keepass/";
+    public static final String emptyDbRoot = "";
+    public static final String validDbFilename = "keepass.kdbx";
+    public static final String emptyDbFilename = "";
+    public static final String defaultDatabasePath = validDbRoot + validDbFilename;
+    public static final String emptyPassword = "";
+    public static final String binGroupName = "RecycleBin";
     final Queue<String> invalidCharsDbRoot = new LinkedList<>(Arrays.asList(
             "/storage/emulated/0/keepass/ɐıʃɐɹʇsnɐ/",
             "/storage/emulated/0/keepass/\uD83C\uDDEA\uD83C\uDDFA/"

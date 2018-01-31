@@ -3,6 +3,9 @@ package eu.haluzpav.fetests.model.screens;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.Arrays;
+import java.util.List;
+
 import eu.haluzpav.fetests.model.Entry;
 import eu.haluzpav.fetests.model.toolbar.ToolbarOption;
 
@@ -36,6 +39,11 @@ public class ReadEntryScreen extends BaseScreen {
 
     @FindBy(id = "entry_edit")
     private WebElement editButton;
+
+    @Override
+    protected List<WebElement> uniqueElements() {
+        return Arrays.asList(usernameField, createdField, editButton);
+    }
 
     public void openEdit() {
         editButton.click();

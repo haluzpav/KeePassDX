@@ -3,7 +3,7 @@ package eu.haluzpav.fetests.model.dialogs;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class AddGroupDialog extends BaseDialog {
+public class AddGroupDialog extends BaseOptionsDialog {
 
     @FindBy(id = "group_name")
     private WebElement groupName;

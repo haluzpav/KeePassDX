@@ -6,16 +6,20 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.Arrays;
+import java.util.List;
+
 import eu.haluzpav.fetests.model.BasePage;
 
 public class Toolbar extends BasePage {
 
     // TODO remove language dependency
-    private static final String BACK_XPATH = "//android.widget.ImageButton[@content-desc=\"Navigate up\"]";
+//    private static final String BACK_XPATH = "//android.widget.ImageButton[@content-desc=\"Navigate up\"]";
+    private static final String BACK_XPATH = "//android.widget.ImageButton";
     private static final String MORE_OPTIONS_XPATH = "//android.widget.ImageView[@content-desc=\"More options\"]";
 
     @FindBy(id = "toolbar")
-    protected WebElement toolbarContainer;
+    private WebElement toolbarContainer;
 
     public void click(ToolbarOption option) {
         try {
@@ -60,4 +64,8 @@ public class Toolbar extends BasePage {
         return getTitleElement().getText();
     }
 
+    @Override
+    protected List<WebElement> uniqueElements() {
+        return Arrays.asList(toolbarContainer);
+    }
 }

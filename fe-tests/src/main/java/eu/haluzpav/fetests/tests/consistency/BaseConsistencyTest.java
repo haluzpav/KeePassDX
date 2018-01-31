@@ -1,4 +1,4 @@
-package eu.haluzpav.fetests.tests.process.open_database;
+package eu.haluzpav.fetests.tests.consistency;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -6,7 +6,7 @@ import org.junit.Test;
 import eu.haluzpav.fetests.model.toolbar.ToolbarOption;
 import eu.haluzpav.fetests.tests.BaseTest;
 
-public abstract class BaseDbProcessTest extends BaseTest {
+abstract class BaseConsistencyTest extends BaseTest {
 
     @Test
     public void s90_goToStart() {
@@ -14,5 +14,4 @@ public abstract class BaseDbProcessTest extends BaseTest {
         groupScreen.toolbar().click(ToolbarOption.LOCK_DB);
         Assert.assertTrue(isOnEnterPass());
     }
-
 }

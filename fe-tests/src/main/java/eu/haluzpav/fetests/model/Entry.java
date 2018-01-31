@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Entry {
 
-    // TODO expires field
+    // TODO dates, expires fields
 
     public String title;
     public String username;
@@ -20,22 +20,27 @@ public class Entry {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Entry entry = (Entry) o;
+        if (o == null) return false;
+        Entry entry;
+        try {
+            entry = (Entry) o;
+        } catch (ClassCastException e) {
+            return false;
+        }
         return Objects.equals(title, entry.title) &&
                 Objects.equals(username, entry.username) &&
                 Objects.equals(url, entry.url) &&
                 Objects.equals(pass, entry.pass) &&
-                Objects.equals(confPass, entry.confPass) &&
-                Objects.equals(comments, entry.comments) &&
-                Objects.equals(created, entry.created) &&
-                Objects.equals(modified, entry.modified) &&
-                Objects.equals(accessed, entry.accessed);
+//                Objects.equals(confPass, entry.confPass) &&
+                Objects.equals(comments, entry.comments);
+//                Objects.equals(created, entry.created) &&
+//                Objects.equals(modified, entry.modified) &&
+//                Objects.equals(accessed, entry.accessed);
 //                Objects.equals(expires, entry.expires); // not implemented in app
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(title, username, url, pass, confPass, comments, created, modified, accessed); //, expires);
+        return Objects.hash(title, username, url, pass, /*confPass,*/ comments);//, created, modified, accessed); //, expires);
     }
 }

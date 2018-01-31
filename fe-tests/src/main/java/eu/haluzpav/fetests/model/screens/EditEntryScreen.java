@@ -3,6 +3,9 @@ package eu.haluzpav.fetests.model.screens;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.Arrays;
+import java.util.List;
+
 import eu.haluzpav.fetests.model.Entry;
 
 public class EditEntryScreen extends BaseScreen {
@@ -45,22 +48,33 @@ public class EditEntryScreen extends BaseScreen {
     @FindBy(id = "entry_save")
     private WebElement saveButton;
 
+    @Override
+    protected List<WebElement> uniqueElements() {
+        return Arrays.asList(titleField, urlField, generateButton, saveButton);
+    }
+
     private void fillNotNull(WebElement element, String value) {
         if (value == null) return;
         fillField(element, value);
     }
 
     public void fillValues(Entry entry) {
+        // hideKeyboards because of that stupid element-blocking FAB
+
         fillNotNull(titleField, entry.title);
         fillNotNull(usernameField, entry.username);
         fillNotNull(urlField, entry.url);
+        driver().hideKeyboard();
         togglePassButton.click();
         fillNotNull(passField, entry.pass);
+        driver().hideKeyboard();
         togglePassButton.click();
         toggleConfPassButton.click();
         fillNotNull(confPassField, entry.confPass);
+        driver().hideKeyboard();
         toggleConfPassButton.click();
         fillNotNull(commentField, entry.comments);
+        driver().hideKeyboard();
     }
 
     public void openGenerator() {
