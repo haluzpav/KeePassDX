@@ -6,7 +6,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import eu.haluzpav.fetests.tests.process.open_database.BaseDbProcessTest;
-import eu.haluzpav.fetests.tests.process.open_database.TDL2.data.BaseData;
+import eu.haluzpav.fetests.tests.process.open_database.TDL2.data.BaseProcessData;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class T0_Default extends BaseDbProcessTest {
@@ -25,7 +25,7 @@ public class T0_Default extends BaseDbProcessTest {
 
     @Test
     public void s02_enterPass() {
-        enterCorrectPassTest(BaseData.validPassword);
+        enterCorrectPassTest(BaseProcessData.validPassword);
     }
 
 }

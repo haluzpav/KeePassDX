@@ -1,13 +1,14 @@
 package eu.haluzpav.fetests.tests.process.open_database.TDL2.data;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-public abstract class BaseData {
+import eu.haluzpav.fetests.Data;
+
+public abstract class BaseProcessData implements Data {
 
     public static final String validPassword = "a";
     public static final String validDbRoot = "/storage/emulated/0/keepass/";
@@ -50,7 +51,5 @@ public abstract class BaseData {
             "sʞɔns ɐıʃɐɹʇsnɐ",
             "\uD83C\uDF4C \uD83C\uDFBE \uD83C\uDDEA\uD83C\uDDFA" // emojis
     ));
-
-    public abstract Collection<Object[]> data();
 
 }

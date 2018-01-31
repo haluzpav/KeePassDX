@@ -11,6 +11,7 @@ public class PassGeneratorDialog extends BaseOptionsDialog {
 
     // TODO slider
 
+    public static final String PASS_HINT = "generated password";
     private static final String[] switchIds = new String[]{
             "cb_uppercase",
             "cb_lowercase",
@@ -21,6 +22,7 @@ public class PassGeneratorDialog extends BaseOptionsDialog {
             "cb_specials",
             "cb_brackets",
     };
+    public static final int N_SWITCHES = switchIds.length;
     @FindBy(id = "password")
     private WebElement passField;
     @FindBy(id = "generate_password_button")
@@ -44,7 +46,10 @@ public class PassGeneratorDialog extends BaseOptionsDialog {
     }
 
     public boolean setLength(int length) {
+        if (!lengthField.getText().isEmpty() && Integer.valueOf(lengthField.getText()) == length)
+            return true;
         lengthField.sendKeys(String.valueOf(length));
+        driver().hideKeyboard();
         return length == Integer.valueOf(lengthField.getText());
     }
 

@@ -7,7 +7,7 @@ import org.junit.runners.MethodSorters;
 
 import eu.haluzpav.fetests.model.Entry;
 import eu.haluzpav.fetests.model.screens.GroupScreen;
-import eu.haluzpav.fetests.tests.process.open_database.TDL2.data.BaseData;
+import eu.haluzpav.fetests.tests.process.open_database.TDL2.data.BaseProcessData;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class T0_EntryCompleteR extends BaseConsistencyTest {
@@ -35,8 +35,8 @@ public class T0_EntryCompleteR extends BaseConsistencyTest {
     @Test
     public void s00_openGroup() {
         tryGoToOpenDbScreenTest();
-        enterCorrectPathTest(BaseData.defaultDatabasePath);
-        enterCorrectPassTest(BaseData.validPassword);
+        enterCorrectPathTest(BaseProcessData.defaultDatabasePath);
+        enterCorrectPassTest(BaseProcessData.validPassword);
 
         Assert.assertFalse(groupScreen.hasEntry(entry));
     }
@@ -93,7 +93,7 @@ public class T0_EntryCompleteR extends BaseConsistencyTest {
         Assert.assertFalse(groupScreen.hasEntry(entryEdited));
 
         // go to bin
-        groupScreen.openGroup(BaseData.binGroupName);
+        groupScreen.openGroup(BaseProcessData.binGroupName);
         groupScreen = new GroupScreen();
         Assert.assertTrue(groupScreen.isOpened());
         Assert.assertTrue(groupScreen.hasEntry(entryEdited));

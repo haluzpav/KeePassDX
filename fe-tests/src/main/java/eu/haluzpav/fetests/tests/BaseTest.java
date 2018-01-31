@@ -18,6 +18,7 @@ import eu.haluzpav.fetests.model.Entry;
 import eu.haluzpav.fetests.model.dialogs.AddGroupDialog;
 import eu.haluzpav.fetests.model.dialogs.CreateDbPassDialog;
 import eu.haluzpav.fetests.model.dialogs.CreateDbPathDialog;
+import eu.haluzpav.fetests.model.dialogs.PassGeneratorDialog;
 import eu.haluzpav.fetests.model.screens.EditEntryScreen;
 import eu.haluzpav.fetests.model.screens.EnterDbPassScreen;
 import eu.haluzpav.fetests.model.screens.GroupScreen;
@@ -38,6 +39,7 @@ public abstract class BaseTest implements Driven {
     protected static ReadEntryScreen readEntryScreen;
     protected static EditEntryScreen editEntryScreen;
     protected static AddGroupDialog addGroupDialog;
+    protected static PassGeneratorDialog passGeneratorDialog;
     private static Properties appiumProps;
     private static AppiumDriverLocalService service;
     private static MyDriver driver;
@@ -98,6 +100,71 @@ public abstract class BaseTest implements Driven {
         return appiumProps.getProperty("adb");
     }
 
+    private static boolean isOnOpenDb() {
+        if (openDbScreen == null) openDbScreen = new OpenDbScreen();
+        return openDbScreen.isOpened();
+    }
+
+    private static void openDatabase(String path) {
+        boolean entered = openDbScreen.enterDbPath(path);
+        if (!path.isEmpty()) Assert.assertTrue(entered);
+
+        openDbScreen.openDbFromPath();
+    }
+
+    protected static void enterCorrectPathTest(String path) {
+        openDatabase(path);
+
+        Assert.assertFalse(isOnOpenDb());
+        Assert.assertTrue(isOnEnterPass());
+    }
+
+    protected static void tryGoToOpenDbScreenTest() {
+        if (isOnEnterPass()) {
+            enterDbPassScreen.toolbar().goBack();
+        }
+        Assert.assertFalse(isOnEnterPass());
+        Assert.assertTrue(isOnOpenDb());
+    }
+
+    protected static boolean isOnEnterPass() {
+        if (enterDbPassScreen == null) enterDbPassScreen = new EnterDbPassScreen();
+        return enterDbPassScreen.isOpened();
+    }
+
+    private static void enterPassAndConfirm(String pass) {
+        boolean entered = enterDbPassScreen.enterPassword(pass);
+        if (!pass.isEmpty()) Assert.assertTrue(entered);
+
+        enterDbPassScreen.confirm();
+    }
+
+    protected static void enterCorrectPassTest(String pass) {
+        enterPassAndConfirm(pass);
+
+        Assert.assertFalse(isOnEnterPass());
+        Assert.assertTrue(isOnGroup());
+    }
+
+    protected static boolean isOnGroup() {
+        if (groupScreen == null) groupScreen = new GroupScreen();
+        return groupScreen.isOpened();
+    }
+
+    public static void openAddEntryTest() {
+        Assert.assertTrue(groupScreen.isOpened());
+        groupScreen.openAddEntry();
+        editEntryScreen = new EditEntryScreen();
+        Assert.assertTrue(editEntryScreen.isOpened());
+    }
+
+    public static void openPassGenTest() {
+        Assert.assertTrue(editEntryScreen.isOpened());
+        editEntryScreen.openGenerator();
+        passGeneratorDialog = new PassGeneratorDialog();
+        Assert.assertTrue(passGeneratorDialog.isOpened());
+    }
+
     @Override
     public final MyDriver driver() {
         return driver;
@@ -108,30 +175,11 @@ public abstract class BaseTest implements Driven {
         Assert.fail("TODO isAppOpenedTest");
     }
 
-    private boolean isOnOpenDb() {
-        if (openDbScreen == null) openDbScreen = new OpenDbScreen();
-        return openDbScreen.isOpened();
-    }
-
-    private void openDatabase(String path) {
-        boolean entered = openDbScreen.enterDbPath(path);
-        if (!path.isEmpty()) Assert.assertTrue(entered);
-
-        openDbScreen.openDbFromPath();
-    }
-
     protected void enterWrongPathTest(String path) {
         openDatabase(path);
 
         Assert.assertTrue(isOnOpenDb());
         Assert.assertFalse(isOnEnterPass());
-    }
-
-    protected void enterCorrectPathTest(String path) {
-        openDatabase(path);
-
-        Assert.assertFalse(isOnOpenDb());
-        Assert.assertTrue(isOnEnterPass());
     }
 
     protected void chooseFromListTest(int index) {
@@ -145,29 +193,9 @@ public abstract class BaseTest implements Driven {
         return isOnEnterPass();
     }
 
-    protected void tryGoToOpenDbScreenTest() {
-        if (isOnEnterPass()) {
-            enterDbPassScreen.toolbar().goBack();
-        }
-        Assert.assertFalse(isOnEnterPass());
-        Assert.assertTrue(isOnOpenDb());
-    }
-
     protected void databaseExistsTest() {
         // TODO databaseExistsTest
         Assert.fail("TODO databaseExistsTest");
-    }
-
-    protected boolean isOnEnterPass() {
-        if (enterDbPassScreen == null) enterDbPassScreen = new EnterDbPassScreen();
-        return enterDbPassScreen.isOpened();
-    }
-
-    private void enterPassAndConfirm(String pass) {
-        boolean entered = enterDbPassScreen.enterPassword(pass);
-        if (!pass.isEmpty()) Assert.assertTrue(entered);
-
-        enterDbPassScreen.confirm();
     }
 
     protected void enterWrongPassTest(String pass) {
@@ -175,13 +203,6 @@ public abstract class BaseTest implements Driven {
 
         Assert.assertTrue(isOnEnterPass());
         Assert.assertFalse(isOnGroup());
-    }
-
-    protected void enterCorrectPassTest(String pass) {
-        enterPassAndConfirm(pass);
-
-        Assert.assertFalse(isOnEnterPass());
-        Assert.assertTrue(isOnGroup());
     }
 
     protected void enterCreatePath(String root, String filename) {
@@ -195,23 +216,11 @@ public abstract class BaseTest implements Driven {
         createDbPassDialog.confirm();
     }
 
-    protected boolean isOnGroup() {
-        if (groupScreen == null) groupScreen = new GroupScreen();
-        return groupScreen.isOpened();
-    }
-
     public void openReadEntryTest(Entry entry) {
         Assert.assertTrue(groupScreen.isOpened());
         groupScreen.openEntry(entry);
         readEntryScreen = new ReadEntryScreen();
         Assert.assertTrue(readEntryScreen.isOpened());
-    }
-
-    public void openAddEntryTest() {
-        Assert.assertTrue(groupScreen.isOpened());
-        groupScreen.openAddEntry();
-        editEntryScreen = new EditEntryScreen();
-        Assert.assertTrue(editEntryScreen.isOpened());
     }
 
     public void openEditEntryTest() {
